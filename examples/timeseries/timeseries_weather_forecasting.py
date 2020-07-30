@@ -197,12 +197,17 @@ learning_rate = 0.001
 batch_size = 256
 epochs = 10
 
-
+"""
 def normalize(data, train_split):
     data_mean = data[:train_split].mean(axis=0)
     data_std = data[:train_split].std(axis=0)
     return (data - data_mean) / data_std
+"""
 
+def normalize(data, train_split):
+    data_min = data[:train_split].min(axis=0)
+    data_max = data[:train_split].max(axis=0)
+    return (data - data_min) / (data_max - data_min)
 
 """
 We can see from the correlation heatmap, few parameters like Relative Humidity and
